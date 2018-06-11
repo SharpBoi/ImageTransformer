@@ -14,7 +14,7 @@ namespace ImageTransformer
         #region Fields
         private List<IRequestHandler> detectors = new List<IRequestHandler>();
         private List<IRequestHandler> handlers = new List<IRequestHandler>();
-        private List<Task> connectionTasks = new List<Task>();
+        private List<Task> connsTasks = new List<Task>();
         #endregion
 
         #region Funcs
