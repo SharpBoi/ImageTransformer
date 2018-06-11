@@ -31,11 +31,12 @@ namespace ImageTransformer
 
         protected override void OnRequestAccept(HttpListenerContext context)
         {
-            Task task = new Task(() => processRequest(context));
+            Task task = null;
+            task = new Task(() => processRequest(context, task));
             task.Start();
         }
 
-        private void processRequest(HttpListenerContext context)
+        private void processRequest(HttpListenerContext context, Task ownerTask)
         {
             for (int i = 0; i < detectors.Count; i++)
             {

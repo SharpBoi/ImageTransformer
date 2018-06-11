@@ -1,4 +1,5 @@
 ﻿using ImageTransformer.RequestHandlers;
+using ImageTransformer.Utilities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -21,7 +22,11 @@ namespace ImageTransformer
         {
             InitializeComponent();
             FormClosing += Form1_FormClosing;
-            
+
+            Logger.Init("./", 1024);
+            Logger.Log(LogType.Info, "---==Server woke up==---");
+
+
             httpServer.AddRequestHandler(new ImageRotFlipHandler());
             httpServer.StartListenAsync("http://localhost:8080/");
         }

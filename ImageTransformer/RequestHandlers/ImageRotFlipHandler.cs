@@ -52,7 +52,7 @@ namespace ImageTransformer.RequestHandlers
                 }
                 catch
                 {
-                    Debug.WriteLine("Exception: while parsing command");
+                    Logger.Log(LogType.Error, "Exception while parsing command");
                     return false;
                 }
 
@@ -67,13 +67,13 @@ namespace ImageTransformer.RequestHandlers
                     }
                     catch
                     {
-                        Debug.WriteLine("Exception: while parsing request arguments");
+                        Logger.Log(LogType.Error, "Exception while parsing request arguments");
                         return false;
                     }
                 }
                 else
                 {
-                    Debug.WriteLine("");
+                    Logger.Log(LogType.Info, "Unknown transform operation");
                 }
             }
 
@@ -99,11 +99,10 @@ namespace ImageTransformer.RequestHandlers
             }
             catch
             {
-                Debug.WriteLine("Exception: cant parse png image");
+                Logger.Log(LogType.Error, "Exception: cant parse png image");
                 context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
                 context.Response.Close();
             }
-
         }
         #endregion
     }
