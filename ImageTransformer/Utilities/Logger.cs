@@ -59,7 +59,7 @@ namespace ImageTransformer.Utilities
 
         public static void Log(EventLogEntryType type, string msg)
         {
-            //trace.GetFrame(1).GetMethod().Name
+            //trace.GetFrame(1).GetMethod().Name 
         }
     }
 }
