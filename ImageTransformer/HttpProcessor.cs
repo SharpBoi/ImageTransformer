@@ -1,4 +1,4 @@
-﻿using ImageTransformer.RequestProcessors;
+﻿using ImageTransformer.RequestHandlers;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -12,21 +12,21 @@ namespace ImageTransformer
     public class HttpProcessor : HttpAcceptor
     {
         #region Fields
-        private List<IRequestProcessor> detectors = new List<IRequestProcessor>();
-        private List<IRequestProcessor> processors = new List<IRequestProcessor>();
+        private List<IRequestHandler> detectors = new List<IRequestHandler>();
+        private List<IRequestHandler> handlers = new List<IRequestHandler>();
         private List<Task> connectionTasks = new List<Task>();
         #endregion
 
         #region Funcs
-        public void AddRequestProcessor(IRequestProcessor reqProc)
+        public void AddRequestHandler(IRequestHandler reqHandler)
         {
             for (int i = 0; i < detectors.Count; i++)
-                if (detectors[i].GetType() == reqProc.GetType())
+                if (detectors[i].GetType() == reqHandler.GetType())
                 {
                     Debug.WriteLine("Exception: Processor of passed type already exists");
                     throw new Exception("Processor of passed type already exists");
                 }
-            detectors.Add(reqProc);
+            detectors.Add(reqHandler);
         }
 
         protected override void OnRequestAccept(HttpListenerContext context)
@@ -39,11 +39,11 @@ namespace ImageTransformer
         {
             for (int i = 0; i < detectors.Count; i++)
             {
-                IRequestProcessor detector = detectors[i];
-                if (detector.IsRequestProcessable(context.Request))
+                IRequestHandler detector = detectors[i];
+                if (detector.IsRequestCanBeHandled(context.Request))
                 {
-                    IRequestProcessor processor = detector.Clone();
-                    processor.StartProcessing(context);
+                    IRequestHandler handler = detector.Clone();
+                    handler.StartHandle(context);
 
                     return;
                 }

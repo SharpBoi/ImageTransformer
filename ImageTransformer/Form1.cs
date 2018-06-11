@@ -1,4 +1,4 @@
-﻿using ImageTransformer.RequestProcessors;
+﻿using ImageTransformer.RequestHandlers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -22,7 +22,7 @@ namespace ImageTransformer
             InitializeComponent();
             FormClosing += Form1_FormClosing;
             
-            httpServer.AddRequestProcessor(new ImageRotFlipProcessor());
+            httpServer.AddRequestHandler(new ImageRotFlipHandler());
             httpServer.StartListenAsync("http://localhost:8080/");
         }
 

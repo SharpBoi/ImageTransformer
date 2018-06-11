@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 using ImageTransformer.Utilities;
 
-namespace ImageTransformer.RequestProcessors
+namespace ImageTransformer.RequestHandlers
 {
-    public class ImageRotFlipProcessor : IRequestProcessor
+    public class ImageRotFlipHandler : IRequestHandler
     {
         #region Fields
         private Dictionary<string, RotateFlipType> cmd_action = new Dictionary<string, RotateFlipType>();
@@ -21,7 +21,7 @@ namespace ImageTransformer.RequestProcessors
         #endregion
 
         #region Funcs
-        public ImageRotFlipProcessor()
+        public ImageRotFlipHandler()
         {
             cmd_action.Add("rotate-cw", RotateFlipType.Rotate90FlipNone);
             cmd_action.Add("rotate-ccw", RotateFlipType.Rotate270FlipNone);
@@ -29,16 +29,16 @@ namespace ImageTransformer.RequestProcessors
             cmd_action.Add("flip-v", RotateFlipType.RotateNoneFlipY);
         }
 
-        public IRequestProcessor Clone()
+        public IRequestHandler Clone()
         {
-            return MemberwiseClone() as IRequestProcessor;
+            return MemberwiseClone() as IRequestHandler;
         }
 
-        public void InterruptProcessing()
+        public void InterruptHandle()
         {
         }
 
-        public bool IsRequestProcessable(HttpListenerRequest req)
+        public bool IsRequestCanBeHandled(HttpListenerRequest req)
         {
             if (req.HttpMethod.ToLower() == "post")
             {
@@ -80,7 +80,7 @@ namespace ImageTransformer.RequestProcessors
             return false;
         }
 
-        public void StartProcessing(HttpListenerContext context)
+        public void StartHandle(HttpListenerContext context)
         {
             byte[] imgBytes = new byte[context.Request.ContentLength64];
             context.Request.InputStream.Read(imgBytes, 0, imgBytes.Length);
