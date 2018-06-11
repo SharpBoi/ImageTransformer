@@ -1,4 +1,5 @@
 ﻿using ImageTransformer.RequestHandlers;
+using ImageTransformer.ServerParts;
 using ImageTransformer.Utilities;
 using System;
 using System.Collections.Generic;

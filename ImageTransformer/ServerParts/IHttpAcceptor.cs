@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using static ImageTransformer.Delegates;
 
-namespace ImageTransformer
+namespace ImageTransformer.ServerParts
 {
     public interface IHttpAcceptor
     {

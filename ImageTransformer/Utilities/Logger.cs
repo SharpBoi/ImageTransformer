@@ -23,8 +23,6 @@ namespace ImageTransformer.Utilities
 
         static string tolog = "";
 
-        static StackTrace trace;
-
         static StreamWriter writer;
         #endregion
 
@@ -41,8 +39,6 @@ namespace ImageTransformer.Utilities
                 currentLogNum = lastLogIndex;
 
             writer = new StreamWriter(logFolder + fullLogName, true);
-
-            trace = new StackTrace();
         }
         public static void Init(int MaxLogSize)
         {
@@ -62,10 +58,8 @@ namespace ImageTransformer.Utilities
             tolog =
                 '[' + DateTime.Now.ToString() + ']' +
                 '[' + type.ToString() + ']' +
-                '[' + trace.GetFrame(1).GetMethod().DeclaringType.Name + ']' +
+                '[' + new StackFrame(1).GetMethod().DeclaringType.Name + ']' +
                 '[' + msg + ']';
-
-            var met = trace.GetFrame(1).GetMethod();
 
             writeLog(tolog);
         }

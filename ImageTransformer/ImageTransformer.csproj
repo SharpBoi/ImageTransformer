@@ -52,9 +52,9 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="HttpAcceptor.cs" />
-    <Compile Include="HttpProcessor.cs" />
-    <Compile Include="IHttpAcceptor.cs" />
+    <Compile Include="ServerParts\HttpAcceptor.cs" />
+    <Compile Include="ServerParts\HttpProcessor.cs" />
+    <Compile Include="ServerParts\IHttpAcceptor.cs" />
     <Compile Include="RequestHandlers\ImageRotFlipHandler.cs" />
     <Compile Include="RequestHandlers\IRequestHandler.cs" />
     <Compile Include="Program.cs" />
